@@ -1,0 +1,13 @@
+<Device Model="MC4">
+   <Network Type="Cresnet" Id="01"/>
+   <Network Type="Ethernet" Id="02">
+      <Device Model="TSW-760" DeviceId="03"/>
+      <Device Model="CEN-GWEXER" DeviceId="04">
+         <Network Type="RF">
+            <Device Model="TST-902" DeviceId="03" Name="TST-902 (EX)"/>
+         </Network>
+      </Device>
+      <Device Model="DM-RMC-4K-SCALER-C" DeviceId="05"/>
+   </Network>
+   <Network Type="RF" Id="08"/>
+</Device>
