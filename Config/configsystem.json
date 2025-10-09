@@ -1,0 +1,207 @@
+{
+  "SystemConfig": {
+    "MenuVisible": [
+      "True",
+      "True",
+      "True",
+      "True",
+      "True",
+      "True"
+    ],
+    "SourceNames": [
+      "Training Room Counter",
+      "Training Room Wall Plate",
+      "Training Room PC",
+      "Boardroom PC",
+      "Boardroom Table HDMI",
+      "Training Room Codec"
+    ],
+    "MicrophoneLabels": [
+      "Wireless 1",
+      "Wireless 2",
+      "Wireless 3",
+      "Wireless 4"
+    ],
+    "DisplayNames": [
+      "Boardroom Proj.",
+      "Training Room Proj."
+    ],
+    "Room Name": [
+      "Training Room / Boardroom"
+    ],
+    "MenuBtnIcons": [
+      "4",
+      "7",
+      "6",
+      "3",
+      "12"
+    ],
+    "DisplayVisibility": [
+      "True",
+      "True"
+    ],
+    "SourcePresent": [
+      "True",
+      "True",
+      "True",
+      "False",
+      "True",
+      "True"
+    ],
+    "SourceIcons": [
+      "9",
+      "9",
+      "9",
+      "9",
+      "9",
+      "9"
+    ],
+    "ShareIcons": [
+      "2",
+      "2",
+      "2",
+      "2",
+      "2"
+    ],
+    "DestinationNames": [
+      "Training Rm Projector",
+      "Boardroom Projector",
+      "Cisco Presentation"
+    ],
+    "DestBtnVisibility": [
+      "True",
+      "True",
+      "True"
+    ],
+    "MicVisibility": [
+      "True",
+      "True",
+      "True",
+      "True"
+    ],
+    "Board Room Name": [
+      "Boardroom"
+    ],
+    "Combined Room Name": [
+      "Training Room / Boardroom"
+    ],
+    "Training Room Name": [
+      "Training Room"
+    ],
+    "MenuLabel": [
+      "Display",
+      "Video",
+      "Audio"
+    ],
+    "MenuExists": [
+      "True",
+      "True",
+      "True"
+    ],
+    "DisplayLabels": [
+      "All Diplays",
+      "Main Display",
+      "Display 1",
+      "Display 2",
+      "Display 3",
+      "Display 4",
+      ""
+    ],
+    "DisplayExists": [
+      "True",
+      "True",
+      "True",
+      "True",
+      "True",
+      "True"
+    ],
+    "AudioLabels": [
+      "PC",
+      "Main TV",
+      "Bluetooth",
+      "Alexa",
+      "Switch",
+      "PS4",
+      "Wii U",
+      "PS2",
+      "PC Screen 1",
+      "PCScreen 2 ",
+      "Table",
+      "N/A",
+      "Air Media"
+    ],
+    "AudioExists": [
+      "True",
+      "True",
+      "True",
+      "True",
+      "True",
+      "True",
+      "True",
+      "True",
+      "True",
+      "True",
+      "True",
+      "",
+      "True"
+    ],
+    "SourceLabels": [
+      "Switch",
+      "PS4",
+      "Wii U",
+      "PS2",
+      "PC1",
+      "PC2",
+      "Table",
+      "N/A",
+      "Air Media"
+    ],
+    "SourceExists": [
+      "True",
+      "True",
+      "True",
+      "True",
+      "True",
+      "True",
+      "True",
+      "False",
+      "True"
+    ],
+    "DestinationLabels": [
+      "Main TV",
+      "Display 3",
+      "Display 4",
+      "N/A"
+    ],
+    "DestinationExists": [
+      "True",
+      "True",
+      "True",
+      "True"
+    ],
+    "PresetNames": [
+      "FOX",
+      "CBS",
+      "ABC",
+      "NBC",
+      "ESPN",
+      "ESPN 2",
+      "FANDUEL",
+      "MC",
+      "",
+      "IFC"
+    ],
+    "PresetPresent": [
+      "True",
+      "True",
+      "True",
+      "True",
+      "True",
+      "True",
+      "True",
+      "True",
+      "True",
+      "True"
+    ]
+  }
+}

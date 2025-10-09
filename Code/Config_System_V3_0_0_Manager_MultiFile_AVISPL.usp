@@ -1,0 +1,317 @@
+/*******************************************************************************************
+  SIMPL+ Module Information
+  (Fill in comments below)
+*******************************************************************************************/
+/*
+Dealer Name: AVI-SPL
+System Name: Config System
+Programmer: LRK
+
+Copyright (C) AVI-SPL. All Rights Reserved.
+The intellectual and technical concepts contained herein are proprietary to AVI-SPL, Inc. and subject to AVI-SPL’s standard software license agreement. 
+These materials may not be copied, reproduced, distributed or disclosed, in whole or in part, in any way without the written permission of an authorized 
+representative of AVI-SPL. All references to AVI-SPL, Inc. shall also be references to AVI-SPL, Inc.’s affiliates.
+
+Comments:
+*/
+
+/*******************************************************************************************
+  Compiler Directives
+  (Uncomment and declare compiler directives as needed)
+*******************************************************************************************/
+                
+//#DEFINE_CONSTANT MAX_PRESETS 10
+
+// #ENABLE_DYNAMIC
+// #SYMBOL_NAME ""
+// #HINT ""
+// #DEFINE_CONSTANT
+#CATEGORY "46" "AVISPL" // Custom
+// #PRINT_TO_TRACE
+// #DIGITAL_EXPAND 
+// #ANALOG_SERIAL_EXPAND 
+// #OUTPUT_SHIFT 
+#HELP_PDF_FILE "Config_System_V3_0_0_Manager_MultiFile_AVISPL.html"
+#DEFAULT_VOLATILE
+#ENABLE_STACK_CHECKING
+//#ENABLE_TRACE
+#ENCODING_ASCII
+// #ENCODING_UTF16
+// #ENCODING_INHERIT_FROM_PARENT
+// #ENCODING_INHERIT_FROM_PROGRAM
+
+// #HELP_BEGIN
+// #HELP_END
+
+/*******************************************************************************************
+  Include Libraries
+  (Uncomment and include additional libraries as needed)
+*******************************************************************************************/
+// #CRESTRON_LIBRARY ""
+// #USER_LIBRARY ""
+#USER_SIMPLSHARP_LIBRARY "Config_System_V3_0_0_ConfigSystem_AVISPL"
+
+/*******************************************************************************************
+  DIGITAL, ANALOG and SERIAL INPUTS and OUTPUTS
+  (Uncomment and declare inputs and outputs as needed)
+*******************************************************************************************/
+
+DIGITAL_INPUT Load, Save, _SKIP_;
+STRING_INPUT OverrideStorageLocation[50];
+STRING_INPUT OverrideProgramName[50];
+STRING_INPUT OverrideFileExtension[50];
+STRING_INPUT OverrideEncoding[50];
+DIGITAL_OUTPUT LoadingFB, SavingFB, _SKIP_, FileLoaded, FileSaved, FileMissing, FileInvalid, UnsavedChanges;
+STRING_OUTPUT FileMessage;
+
+/*******************************************************************************************
+  SOCKETS
+  (Uncomment and define socket definitions as needed)
+*******************************************************************************************/
+
+/*******************************************************************************************
+  Parameters
+  (Uncomment and declare parameters as needed)
+*******************************************************************************************/
+// INTEGER_PARAMETER
+// SIGNED_INTEGER_PARAMETER
+// LONG_INTEGER_PARAMETER
+// SIGNED_LONG_INTEGER_PARAMETER
+// STRING_PARAMETER
+                      
+STRING_PARAMETER _SKIP_, _SKIP_, _SKIP_, _SKIP_, _SKIP_, _SKIP_, _SKIP_, _SKIP_, _SKIP_, _SKIP_, File_Extension[30], Storage_Location[10], Program_Name[25], File_Mode[2], File_Encoding[50];
+
+
+/*******************************************************************************************
+  Parameter Properties
+*******************************************************************************************/
+
+#BEGIN_PARAMETER_PROPERTIES File_Extension
+   propValidUnits = unitString;
+   propDefaultUnit = unitString;
+   propDefaultValue = ".json";
+   propShortDescription = "config system file name";
+#END_PARAMETER_PROPERTIES
+        
+#BEGIN_PARAMETER_PROPERTIES Storage_Location
+   propValidUnits = unitString;
+   propDefaultUnit = unitString;
+   propDefaultValue = "User";
+   propList = { "NVRAM" , "NVRAM" } , { "CF0" , "Compact Flash" } , { "RM" , "Removable Media (USB)" }  , { "RM2" , "Removable Media 2 (USB)" }  , { "MMC" , "Multimedia Card" } , { "USER" , "User" };
+#END_PARAMETER_PROPERTIES
+
+#BEGIN_PARAMETER_PROPERTIES Program_Name
+   propValidUnits = unitString;
+   propDefaultUnit = unitString;
+   propDefaultValue = "Main";
+#END_PARAMETER_PROPERTIES
+
+#BEGIN_PARAMETER_PROPERTIES File_Mode
+   propValidUnits = unitString;
+   propDefaultUnit = unitString;
+   propDefaultValue = "RW";
+   propList = { "R" , "Read" } , { "W" , "Write" } , { "RW" , "Read-Write" };
+#END_PARAMETER_PROPERTIES
+
+#BEGIN_PARAMETER_PROPERTIES File_Encoding
+   propValidUnits = unitString;
+   propDefaultUnit = unitString;
+   propDefaultValue = "us-ascii";
+   propList = { "us-ascii" , "ASCII" } , { "utf-8" , "UTF8" } , { "utf-16" , "UNICODE" }, { "iso-8859-1", "ISO-8859-1" };
+#END_PARAMETER_PROPERTIES
+
+/*******************************************************************************************
+  Structure Definitions
+  (Uncomment and define structure definitions as needed)
+  Note:  Be sure to initialize all declared STRING variables as needed
+         For example, in Function Main: struct.myString = "";
+*******************************************************************************************/
+
+/*******************************************************************************************
+  Global Variables
+*******************************************************************************************/
+                    
+MultiFileManager manager;
+             
+STRING cLocalPath[50];
+STRING oStorageLocation[50];
+STRING oProgramName[50];
+STRING oFileExtension[50];
+
+/*******************************************************************************************
+  Functions
+*******************************************************************************************/
+
+FUNCTION SetFilePath()
+{
+	STRING lStorageLocation[50];
+	STRING lProgramName[50];
+	STRING lFileExtension[50];
+    
+	IF(LEN(oStorageLocation) > 0)
+		lStorageLocation = oStorageLocation;
+	ELSE
+        lStorageLocation = Storage_Location;
+
+	IF(LEN(oProgramName) > 0)
+		lProgramName = oProgramName;
+	ELSE
+        lProgramName = Program_Name;
+
+	IF(LEN(oFileExtension) > 0)
+		lFileExtension = oFileExtension;
+	ELSE
+        lFileExtension = File_Extension;
+
+
+
+	// Set up file names
+	IF(Program_Name != "") cLocalPath = "\\" + lStorageLocation + "\\" + lProgramName + "\\";
+	ELSE cLocalPath = "\\" + lStorageLocation + "\\";
+	
+	manager.Initialize(cLocalPath, lFileExtension);
+}
+
+FUNCTION ModuleInitialize()
+{
+    manager.SetMode(File_Mode);
+    SetFilePath();         
+    manager.SetEncoding(File_Encoding);
+
+    // Register events
+    RegisterEvent(manager, OnLoadingStatusChanged, OnLoadingStatusChangedHandler);
+    RegisterEvent(manager, OnValuesChanged, OnValuesChangedHandler);
+}
+
+FUNCTION SendConfigMessage ( STRING message )
+{
+    MAKESTRING(FileMessage, "%s", message);
+}
+
+/*******************************************************************************************
+  Event Handlers
+*******************************************************************************************/
+                                           
+PUSH Load
+{
+	manager.LoadRequest();
+}
+
+PUSH Save
+{
+	manager.SaveRequest();
+}
+
+CHANGE OverrideStorageLocation
+{
+	oStorageLocation = OverrideStorageLocation;
+	SetFilePath();
+}
+
+CHANGE OverrideProgramName
+{
+	oProgramName = OverrideProgramName;
+	SetFilePath();
+}
+
+CHANGE OverrideFileExtension
+{
+	oFileExtension = OverrideFileExtension;
+	SetFilePath();
+}
+
+CHANGE OverrideEncoding
+{
+    manager.SetEncoding(OverrideEncoding);
+}
+
+EVENTHANDLER OnLoadingStatusChangedHandler(MultiFileManager sender, FileStatusEventArgs args)
+{
+    if(args.LoadingComplete = 1)
+    {
+        SendConfigMessage("Config Loaded");
+        FileLoaded = 1;
+    }
+    else
+    {
+        FileLoaded = 0;        
+    }
+    
+    if(args.SaveComplete = 1)
+    {
+        SendConfigMessage("Config Saved");      
+        FileSaved = 1;
+    }
+    else
+    {
+        FileSaved = 0;        
+    }
+    
+    if(args.NonexistentConfig = 1)
+    {
+        SendConfigMessage("Config File Missing");
+        FileMissing = 1;
+    }
+    else
+    {
+        FileMissing = 0;        
+    }
+    
+    if(args.InvalidConfig = 1)
+    {
+        SendConfigMessage("Config File Invalid");
+        FileInvalid = 1;
+    }
+    else
+    {
+        FileInvalid = 0;        
+    }
+    
+    if(args.LoadingInProgress = 1)
+    {
+        SendConfigMessage("Config Beginning Load");
+        LoadingFB = 1;
+    }
+    else
+    {
+        LoadingFB = 0;        
+    }
+    
+    if(args.SavingInProgress = 1)
+    {
+        SendConfigMessage("Config Beginning Save");
+        SavingFB = 1;
+    }
+    else
+    {
+        SavingFB = 0;        
+    }
+
+    UnsavedChanges = 0;
+}
+
+EVENTHANDLER OnValuesChangedHandler(MultiFileManager sender, EventArgs args)
+{
+    SendConfigMessage("Values have Changed");
+    FileLoaded = 0;
+    FileSaved = 0;
+    FileMissing = 0;
+    FileInvalid = 0;
+    UnsavedChanges = 1;
+}
+
+/*******************************************************************************************
+  Main()
+*******************************************************************************************/
+
+Function Main()
+{
+    WaitForInitializationComplete();
+
+    ModuleInitialize();
+
+} 
+
+/*
+pipeline-build-version: 3.0.0+1a54a33
+*/

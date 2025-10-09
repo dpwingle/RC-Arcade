@@ -1,0 +1,1047 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>ConfigSystem</name>
+    </assembly>
+    <members>
+        <member name="T:ConfigSystem.Logger">
+            <summary>
+            A simple log helper.
+            </summary>
+            <seealso cref="T:System.Object"/>
+        </member>
+        <member name="F:ConfigSystem.Logger.LogHeader">
+            <summary>
+            The header for the log.
+            </summary>
+        </member>
+        <member name="M:ConfigSystem.Logger.Debug(System.String)">
+            <summary>
+            Log a Debug level message.
+            </summary>
+            <param name="message">The message.</param>
+        </member>
+        <member name="M:ConfigSystem.Logger.Warn(System.String)">
+            <summary>
+            Logs a Warn level message.
+            </summary>
+            <param name="message">The message.</param>
+        </member>
+        <member name="M:ConfigSystem.Logger.Error(System.String)">
+            <summary>
+            Log a Error level message.
+            </summary>
+            <param name="message">The message.</param>
+        </member>
+        <member name="T:ConfigSystem.Data.ConfigEventArgs">
+            <summary>
+            Contains information for changes of configuration value.
+            </summary>
+            <seealso cref="T:System.EventArgs"/>
+        </member>
+        <member name="M:ConfigSystem.Data.ConfigEventArgs.#ctor(System.UInt16,System.String,System.UInt16,System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:ConfigSystem.Data.ConfigEventArgs"/> class.
+            </summary>
+            <param name="propIndex">the index of the property that is changing.</param>
+            <param name="propName">the name of the property that is changing.</param>
+            <param name="valueIndex">the index of the value feedback in SIMPL+ that is changing.</param>
+            <param name="newValue">the new value.</param>
+        </member>
+        <member name="M:ConfigSystem.Data.ConfigEventArgs.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:ConfigSystem.Data.ConfigEventArgs"/> class.
+            </summary>
+        </member>
+        <member name="M:ConfigSystem.Data.ConfigEventArgs.ValueAsAnalog">
+            <summary>
+            Returns the value as an analog.
+            </summary>
+            <returns>The value as an analog.</returns>
+        </member>
+        <member name="M:ConfigSystem.Data.ConfigEventArgs.ValueAsDigital">
+            <summary>
+            Returns the value as a digital.
+            </summary>
+            <returns>The value as a digital.</returns>
+        </member>
+        <member name="M:ConfigSystem.Data.ConfigEventArgs.ValueAsSerial">
+            <summary>
+            Returns the value as a serial.
+            </summary>
+            <returns>The value as a serial.</returns>
+        </member>
+        <member name="P:ConfigSystem.Data.ConfigEventArgs.Prop">
+            <summary>
+            Gets or sets the name of the property being changed.
+            </summary>
+            <value></value>
+        </member>
+        <member name="P:ConfigSystem.Data.ConfigEventArgs.PropIndex">
+            <summary>
+            Gets or sets the index of the property being changed.
+            </summary>
+            <value></value>
+        </member>
+        <member name="P:ConfigSystem.Data.ConfigEventArgs.ValueIndex">
+            <summary>
+            Gets or sets the index of the value feedback in SIMPL+.
+            </summary>
+            <value></value>
+        </member>
+        <member name="P:ConfigSystem.Data.ConfigEventArgs.NewValue">
+            <summary>
+            Gets or sets the new value for the property.
+            </summary>
+            <value></value>
+        </member>
+        <member name="T:ConfigSystem.Simpl.ConfigValue">
+            <summary>
+            Defines a config value. 
+            </summary>
+            <seealso cref="T:System.Object"/>
+        </member>
+        <member name="F:ConfigSystem.Simpl.ConfigValue.valueManager">
+            <summary>
+            The manager for this config value.
+            </summary>
+        </member>
+        <member name="M:ConfigSystem.Simpl.ConfigValue.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:ConfigSystem.Simpl.ConfigValue"/> class.
+            </summary>
+        </member>
+        <member name="M:ConfigSystem.Simpl.ConfigValue.Register(System.String,System.String,System.UInt16)">
+            <summary>
+            Registers this ConfigValue module with the registry.
+            </summary>
+            <param name="managerName">The name of the manager.</param>
+            <param name="valueName">The name of the value.</param>
+            <param name="simplIndex">The index of the value in SIMPL+.</param>
+        </member>
+        <member name="M:ConfigSystem.Simpl.ConfigValue.SetSingleAnalog(System.UInt16)">
+            <summary>
+            Sets the value to the string representation of <paramref name="newValue"/>.
+            </summary>
+            <param name="newValue">The analog value.</param>
+        </member>
+        <member name="M:ConfigSystem.Simpl.ConfigValue.SetSingleDigital(System.UInt16)">
+            <summary>
+            Sets the value to `True` when <paramref name="newValue"/> is greater than 0, and `False` otherwise.
+            </summary>
+            <param name="newValue">The analog representation of the boolean value.</param>
+        </member>
+        <member name="M:ConfigSystem.Simpl.ConfigValue.ToggleSingleDigital">
+            <summary>
+            Toggles the value if it is a digital.
+            </summary>
+        </member>
+        <member name="M:ConfigSystem.Simpl.ConfigValue.SetSingleSerial(System.String)">
+            <summary>
+            Sets the value to <paramref name="newValue"/>.
+            </summary>
+            <param name="newValue">The new value.</param>
+        </member>
+        <member name="M:ConfigSystem.Simpl.ConfigValue.SetBlockAnalog(System.UInt16,System.UInt16)">
+            <summary>
+            Sets the value at index <paramref name="i"/> to the string representation of <paramref name="newValue"/>.
+            </summary>
+            <param name="i">The index to set.</param>
+            <param name="newValue">The new value.</param>
+        </member>
+        <member name="M:ConfigSystem.Simpl.ConfigValue.SetBlockDigital(System.UInt16,System.UInt16)">
+            <summary>
+            Sets the value at index <paramref name="i"/> to `True` when <paramref name="newValue"/> is greater than 0, and `False` otherwise.
+            </summary>
+            <param name="i">The index to set.</param>
+            <param name="newValue">The new value.</param>
+        </member>
+        <member name="M:ConfigSystem.Simpl.ConfigValue.ToggleBlockDigital(System.UInt16)">
+            <summary>
+            Toggles the digital value at index <paramref name="i"/>.
+            </summary>
+            <param name="i">The index to toggle.</param>
+        </member>
+        <member name="M:ConfigSystem.Simpl.ConfigValue.SetBlockSerial(System.UInt16,System.String)">
+            <summary>
+            Sets the value at index <paramref name="i"/> to <paramref name="newValue"/>.
+            </summary>
+            <param name="i">The index to set.</param>
+            <param name="newValue">The new value.</param>
+        </member>
+        <member name="M:ConfigSystem.Simpl.ConfigValue.RaiseOnValueChanged(System.Int32,System.String)">
+            <summary>
+            Raises the OnValueChanged event.
+            </summary>
+            <param name="index">The index of the changing value.</param>
+            <param name="newValue">The new value.</param>
+        </member>
+        <member name="M:ConfigSystem.Simpl.ConfigValue.SetValueAtIndex(System.Int32,System.String)">
+            <summary>
+            Sets the value at index <paramref name="i"/> to <paramref name="newValue"/>.
+            </summary>
+            <param name="i">The index to set.</param>
+            <param name="newValue">The new value.</param>
+        </member>
+        <member name="M:ConfigSystem.Simpl.ConfigValue.SetFirstValue(System.String)">
+            <summary>
+            Sets the value at index 1 to <paramref name="newValue"/>.
+            </summary>
+            <param name="newValue">The new value.</param>
+        </member>
+        <member name="M:ConfigSystem.Simpl.ConfigValue.OnValueChangedHandler(System.Object,ConfigSystem.Data.ValueChangedEventArgs)">
+            <summary>
+            Handles changes to the underlying manager state. Used when loading configurations.
+            </summary>
+            <param name="s">Required for handler signature.</param>
+            <param name="vcea">The <see cref="T:ConfigSystem.Data.ValueChangedEventArgs"/> that provide event information.</param>
+        </member>
+        <member name="E:ConfigSystem.Simpl.ConfigValue.OnValueChanged">
+            <summary>
+            Occurs when the value changes.
+            </summary>
+        </member>
+        <member name="P:ConfigSystem.Simpl.ConfigValue.SimplIndex">
+            <summary>
+            Gets the index of the value in SIMPL+.
+            </summary>
+            <value></value>
+        </member>
+        <member name="P:ConfigSystem.Simpl.ConfigValue.Name">
+            <summary>
+            Gets the name of the value.
+            </summary>
+            <value></value>
+        </member>
+        <member name="T:ConfigSystem.Manager.FileStatusEventArgs">
+            <summary>
+            Contains information for
+            </summary>
+            <seealso cref="T:System.EventArgs"/>
+        </member>
+        <member name="F:ConfigSystem.Manager.FileStatusEventArgs.LoadedArgs">
+            <summary>
+            Returns a <see cref="T:ConfigSystem.Manager.FileStatusEventArgs"/> that indicates loading is complete.
+            </summary>
+        </member>
+        <member name="F:ConfigSystem.Manager.FileStatusEventArgs.SavedArgs">
+            <summary>
+            Returns a <see cref="T:ConfigSystem.Manager.FileStatusEventArgs"/> that indicates saving is complete.
+            </summary>
+        </member>
+        <member name="F:ConfigSystem.Manager.FileStatusEventArgs.NonexistentArgs">
+            <summary>
+            Returns a <see cref="T:ConfigSystem.Manager.FileStatusEventArgs"/> that indicates the specified file is nonexistent.
+            </summary>
+        </member>
+        <member name="F:ConfigSystem.Manager.FileStatusEventArgs.InvalidArgs">
+            <summary>
+            Returns a <see cref="T:ConfigSystem.Manager.FileStatusEventArgs"/> that indicates the configuration file invalid.
+            </summary>
+        </member>
+        <member name="F:ConfigSystem.Manager.FileStatusEventArgs.LoadingArgs">
+            <summary>
+            Returns a <see cref="T:ConfigSystem.Manager.FileStatusEventArgs"/> that indicates that loading is in progress.
+            </summary>
+        </member>
+        <member name="F:ConfigSystem.Manager.FileStatusEventArgs.SavingArgs">
+            <summary>
+            Returns a <see cref="T:ConfigSystem.Manager.FileStatusEventArgs"/> that indicates the saving is in progress.
+            </summary>
+        </member>
+        <member name="M:ConfigSystem.Manager.FileStatusEventArgs.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:ConfigSystem.Manager.FileStatusEventArgs"/> class. This constructor is required for SIMPL+.
+            </summary>
+        </member>
+        <member name="P:ConfigSystem.Manager.FileStatusEventArgs.Loaded">
+            <summary>
+            Gets a <see cref="T:ConfigSystem.Manager.FileStatusEventArgs"/> indicating that the config is loaded.
+            </summary>
+            <value></value>
+        </member>
+        <member name="P:ConfigSystem.Manager.FileStatusEventArgs.Saved">
+            <summary>
+            Gets a <see cref="T:ConfigSystem.Manager.FileStatusEventArgs"/> indicating that the config is saved.
+            </summary>
+            <value></value>
+        </member>
+        <member name="P:ConfigSystem.Manager.FileStatusEventArgs.Nonexistent">
+            <summary>
+            Gets a <see cref="T:ConfigSystem.Manager.FileStatusEventArgs"/> indicating that the config is nonexistent.
+            </summary>
+            <value></value>
+        </member>
+        <member name="P:ConfigSystem.Manager.FileStatusEventArgs.Invalid">
+            <summary>
+            Gets a <see cref="T:ConfigSystem.Manager.FileStatusEventArgs"/> indicating that the config is invalid.
+            </summary>
+            <value></value>
+        </member>
+        <member name="P:ConfigSystem.Manager.FileStatusEventArgs.Loading">
+            <summary>
+            Gets a <see cref="T:ConfigSystem.Manager.FileStatusEventArgs"/> indicating that the config is loading.
+            </summary>
+            <value></value>
+        </member>
+        <member name="P:ConfigSystem.Manager.FileStatusEventArgs.Saving">
+            <summary>
+            Gets a <see cref="T:ConfigSystem.Manager.FileStatusEventArgs"/> indicating that the config is saving.
+            </summary>
+            <value></value>
+        </member>
+        <member name="P:ConfigSystem.Manager.FileStatusEventArgs.LoadingComplete">
+            <summary>
+            Gets or sets the LoadingComplete state.
+            </summary>
+            <value></value>
+        </member>
+        <member name="P:ConfigSystem.Manager.FileStatusEventArgs.SaveComplete">
+            <summary>
+            Gets or sets the SaveComplete state.
+            </summary>
+            <value></value>
+        </member>
+        <member name="P:ConfigSystem.Manager.FileStatusEventArgs.NonexistentConfig">
+            <summary>
+            Gets or sets the NonexistentConfig state.
+            </summary>
+            <value></value>
+        </member>
+        <member name="P:ConfigSystem.Manager.FileStatusEventArgs.InvalidConfig">
+            <summary>
+            Gets or sets the InvalidConfig state.
+            </summary>
+            <value></value>
+        </member>
+        <member name="P:ConfigSystem.Manager.FileStatusEventArgs.LoadingInProgress">
+            <summary>
+            Gets or sets the LoadingInProgress state.
+            </summary>
+            <value></value>
+        </member>
+        <member name="P:ConfigSystem.Manager.FileStatusEventArgs.SavingInProgress">
+            <summary>
+            Gets or sets the SavingInProgress state.
+            </summary>
+            <value></value>
+        </member>
+        <member name="T:ConfigSystem.Simpl.ConfigValueGroup">
+            <summary>
+            Defines a dictionary of <seealso cref="T:ConfigSystem.Simpl.ConfigValue"/> objects.
+            </summary>
+            <seealso cref="T:System.Object"/>
+        </member>
+        <member name="F:ConfigSystem.Simpl.ConfigValueGroup.values">
+            <summary>
+            The underlying dictionary.
+            </summary>
+        </member>
+        <member name="M:ConfigSystem.Simpl.ConfigValueGroup.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:ConfigSystem.Simpl.ConfigValueGroup"/> class.
+            </summary>
+        </member>
+        <member name="M:ConfigSystem.Simpl.ConfigValueGroup.Register(System.String,System.String,System.UInt16)">
+            <summary>
+            Registers a new <seealso cref="T:ConfigSystem.Simpl.ConfigValue"/> with this <see cref="T:ConfigSystem.Simpl.ConfigValueGroup"/>.
+            </summary>
+            <param name="managerName">The name of the value's manager.</param>
+            <param name="valueName">The name of the value.</param>
+            <param name="valueIndex">The index of the value.</param>
+        </member>
+        <member name="M:ConfigSystem.Simpl.ConfigValueGroup.SetSingleAnalog(System.String,System.UInt16)">
+            <summary>
+            Sets <paramref name="name"/>'s value at index 1 to the string representation of <paramref name="value"/>.
+            </summary>
+            <param name="name">The name of the value.</param>
+            <param name="value">The new value.</param>
+        </member>
+        <member name="M:ConfigSystem.Simpl.ConfigValueGroup.SetSingleDigital(System.String,System.UInt16)">
+            <summary>
+            Sets <paramref name="name"/>'s value at index 1 to `True` if <paramref name="value"/> is greater than 0, and `False` otherwise.
+            </summary>
+            <param name="name">The name of the value.</param>
+            <param name="value">The new value.</param>
+        </member>
+        <member name="M:ConfigSystem.Simpl.ConfigValueGroup.ToggleSingleDigital(System.String)">
+            <summary>
+            Toggles <paramref name="name"/>'s value at index 1 if it a digital.
+            </summary>
+            <param name="name">The name of the value.</param>
+        </member>
+        <member name="M:ConfigSystem.Simpl.ConfigValueGroup.SetSingleSerial(System.String,System.String)">
+            <summary>
+            Sets <paramref name="name"/>'s value to <paramref name="value"/>.
+            </summary>
+            <param name="name">The name of the value.</param>
+            <param name="value">The new value.</param>
+        </member>
+        <member name="M:ConfigSystem.Simpl.ConfigValueGroup.ValueChangedHandler(System.Object,ConfigSystem.Data.ConfigEventArgs)">
+            <summary>
+            Handles changes to the underlying manager's values. Used for loading configuration values.
+            </summary>
+            <param name="s">Required for handler signature.</param>
+            <param name="cea">The <see cref="T:ConfigSystem.Data.ConfigEventArgs"/> that provide event information.</param>
+        </member>
+        <member name="E:ConfigSystem.Simpl.ConfigValueGroup.OnValueChanged">
+            <summary>
+            Occurs when a value within <see cref="F:ConfigSystem.Simpl.ConfigValueGroup.values"/> changes.
+            </summary>
+        </member>
+        <member name="T:ConfigSystem.ConfigSystemStatics">
+            <summary>
+            Defines static objects required for Config System functionality.
+            </summary>
+            <seealso cref="T:System.Object"/>
+        </member>
+        <member name="F:ConfigSystem.ConfigSystemStatics.ConfigValueManagers">
+            <summary>
+            The slot specific dictionary of <paramref name="ConfigValueManager"/>s.
+            </summary>
+        </member>
+        <member name="F:ConfigSystem.ConfigSystemStatics.RegistrationSection">
+            <summary>
+            Synchronization object for registration.
+            </summary>
+        </member>
+        <member name="M:ConfigSystem.ConfigSystemStatics.#cctor">
+            <summary>
+            Initializes static members of the <see cref="T:ConfigSystem.ConfigSystemStatics"/> class.
+            </summary>
+        </member>
+        <member name="M:ConfigSystem.ConfigSystemStatics.RegisterModule(ConfigSystem.IConfigStorable)">
+            <summary>
+            Register a module with the registry.
+            </summary>
+            <param name="module">The module to register.</param>
+            <returns>true upon success.</returns>
+        </member>
+        <member name="M:ConfigSystem.ConfigSystemStatics.RegisterPersistenceManager(ConfigSystem.IPersistenceManager)">
+            <summary>
+            Register a class as a file / persistence manager.
+            </summary>
+            <param name="manager">The class to register.</param>
+        </member>
+        <member name="M:ConfigSystem.ConfigSystemStatics.RegisterValueManager(System.String)">
+            <summary>
+            Register a value manager.
+            </summary>
+            <param name="managerName">The name of the manager.</param>
+            <returns>The new manager, or the existing one with name <paramref name="managerName"/>.</returns>
+        </member>
+        <member name="M:ConfigSystem.ConfigSystemStatics.NotifyPersistenceChanges(System.Object,ConfigSystem.Data.ValueChangedEventArgs)">
+            <summary>
+            Notifies all persistence managers that there have been changes since their last load.
+            </summary>
+            <param name="s">Required for handler signature.</param>
+            <param name="vcea">The <see cref="T:ConfigSystem.Data.ValueChangedEventArgs"/> that provide event information.</param>
+        </member>
+        <member name="P:ConfigSystem.ConfigSystemStatics.StorableModules">
+            <summary>
+            Gets the list of storable values.
+            </summary>
+            <value></value>
+        </member>
+        <member name="P:ConfigSystem.ConfigSystemStatics.PersistenceManagers">
+            <summary>
+            Gets the list of Persistence manager implementations.
+            </summary>
+            <value></value>
+        </member>
+        <member name="T:ConfigSystem.IConfigStorable">
+            <summary>
+            Defines the requirements for a
+            </summary>
+        </member>
+        <member name="M:ConfigSystem.IConfigStorable.GetSerializableData">
+            <summary>
+            Tells the manager what the data is to be stored.
+            </summary>
+            <returns>the data to be stored</returns>
+        </member>
+        <member name="M:ConfigSystem.IConfigStorable.SetSerializableData(System.Object)">
+            <summary>
+            Lets the manager tell the storable what data it retrieved for it.
+            </summary>
+            <param name="data">the retrieved data</param>
+        </member>
+        <member name="M:ConfigSystem.IConfigStorable.GetSerializableType">
+            <summary>
+            Returns the type of the data this manager uses.
+            </summary>
+            <returns>the Type containing the structure</returns>
+        </member>
+        <member name="P:ConfigSystem.IConfigStorable.Name">
+            <summary>
+            Gets the name of this object.
+            </summary>
+            <returns>the name of the storable object</returns>
+        </member>
+        <member name="M:ConfigSystem.Preset.PresetManager.RegisterModule(System.String)">
+            <summary>
+            Register this instance with the File Manager and the Connector.
+            </summary>
+        </member>
+        <member name="M:ConfigSystem.Preset.PresetManager.RegisterClient(ConfigSystem.Preset.PresetClient)">
+            <summary>
+            Allow a "Value" to register with this manager.
+            </summary>
+            <param name="c">the client to register</param>
+        </member>
+        <member name="M:ConfigSystem.Preset.PresetManager.RecallPreset(System.UInt16)">
+            <summary>
+            Recall a preset
+            </summary>
+            <param name="index">Index of the preset</param>
+        </member>
+        <member name="M:ConfigSystem.Preset.PresetManager.GetName">
+            <summary>
+            Implementing function for interface
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:ConfigSystem.Preset.PresetManager.GetSerializableData">
+            <summary>
+            Implementing function for interface
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:ConfigSystem.Preset.PresetManager.SetSerializableData(System.Object)">
+            <summary>
+            Implementing function for interface
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:ConfigSystem.Preset.PresetManager.GetSerializableType">
+            <summary>
+            Implementing function for interface
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:ConfigSystem.Data.ValueChangedEventArgs">
+            <summary>
+            Contains information for when a Value changes.
+            </summary>
+            <seealso cref="T:System.EventArgs"/>
+        </member>
+        <member name="M:ConfigSystem.Data.ValueChangedEventArgs.#ctor(System.String,System.String,System.Int32)">
+            <summary>
+            Initializes a new instance of the <see cref="T:ConfigSystem.Data.ValueChangedEventArgs"/> class.
+            </summary>
+            <param name="valueName">The name of the value that is changing.</param>
+            <param name="newValue">The value that is being changed to.</param>
+            <param name="index">The index of the value.</param>
+        </member>
+        <member name="P:ConfigSystem.Data.ValueChangedEventArgs.ValueName">
+            <summary>
+            Gets or sets the name of the value that is changing.
+            </summary>
+            <value></value>
+        </member>
+        <member name="P:ConfigSystem.Data.ValueChangedEventArgs.NewValue">
+            <summary>
+            Gets or sets the new value being changed to.
+            </summary>
+            <value></value>
+        </member>
+        <member name="P:ConfigSystem.Data.ValueChangedEventArgs.ValueIndex">
+            <summary>
+            Gets or sets the index of the value.
+            </summary>
+            <value></value>
+        </member>
+        <member name="T:ConfigSystem.Manager.FileManager">
+            <summary>
+            Denotes a single configuration file manager.
+            </summary>
+            <seealso cref="T:ConfigSystem.Manager.FileManagerBase"/>
+        </member>
+        <member name="T:ConfigSystem.Manager.FileManagerBase">
+            <summary>
+            <para>Also implements <see cref="T:ConfigSystem.IPersistenceManager"/>.</para>
+            </summary>
+            <seealso cref="T:System.Object"/>
+            <seealso cref="T:ConfigSystem.IPersistenceManager"/>
+        </member>
+        <member name="T:ConfigSystem.IPersistenceManager">
+            <summary>
+            Defines the requirements for a persistence manager.
+            </summary>
+        </member>
+        <member name="M:ConfigSystem.IPersistenceManager.LoadConfig">
+            <summary>
+            This method is required for the config system to load the config.
+            </summary>
+            <returns><see langword="true"/> if successfully loaded</returns>
+        </member>
+        <member name="M:ConfigSystem.IPersistenceManager.SaveConfig">
+            <summary>
+            This method is required for the config system to save the config.
+            </summary>
+            <returns><see langword="true"/> if successfully saved</returns>
+        </member>
+        <member name="M:ConfigSystem.IPersistenceManager.NotifyChanges">
+            <summary>
+            This method is for the config system to notify the manager that unsaved changes are available.
+            </summary>
+        </member>
+        <member name="P:ConfigSystem.IPersistenceManager.CanRead">
+            <summary>
+            Gets a value indicating whether the manager is capable of reading.
+            </summary>
+        </member>
+        <member name="P:ConfigSystem.IPersistenceManager.CanWrite">
+            <summary>
+            Gets a value indicating whether the manager is capable of writing.
+            </summary>
+        </member>
+        <member name="F:ConfigSystem.Manager.FileManagerBase.canRead">
+            <summary>
+            Backing field for the <see cref="P:ConfigSystem.Manager.FileManagerBase.CanRead"/> property.
+            </summary>
+        </member>
+        <member name="F:ConfigSystem.Manager.FileManagerBase.canWrite">
+            <summary>
+            Backing field for the <see cref="P:ConfigSystem.Manager.FileManagerBase.CanWrite"/> property.
+            </summary>
+        </member>
+        <member name="F:ConfigSystem.Manager.FileManagerBase.encodingName">
+            <summary>
+            The name of the current encoding.
+            </summary>
+        </member>
+        <member name="M:ConfigSystem.Manager.FileManagerBase.SetMode(Crestron.SimplSharp.SimplSharpString)">
+            <summary>
+            Sets the read/write mode using <paramref name="mode"/>.
+            <para>If <paramref name="mode"/> contains an `r` or `R` character, the manager can read. </para>
+            <para>If <paramref name="mode"/> contains a `w` or `W` character, the manager can write.</para>
+            </summary>
+            <param name="mode">A string, typically R, W, or RW|WR the indicates the read/write permissions.</param>
+        </member>
+        <member name="M:ConfigSystem.Manager.FileManagerBase.SaveRequest">
+            <summary>
+            Request a save to be issued.
+            </summary>
+        </member>
+        <member name="M:ConfigSystem.Manager.FileManagerBase.LoadRequest">
+            <summary>
+            Request a load.
+            </summary>
+        </member>
+        <member name="M:ConfigSystem.Manager.FileManagerBase.SaveConfig">
+            <summary>
+            Save the config file.
+            </summary>
+            <returns>true upon success.</returns>
+        </member>
+        <member name="M:ConfigSystem.Manager.FileManagerBase.LoadConfig">
+            <summary>
+            Load the config file.
+            </summary>
+            <returns>true upon success.</returns>
+        </member>
+        <member name="M:ConfigSystem.Manager.FileManagerBase.NotifyChanges">
+            <summary>
+            Be notified when a value registered with the system has changed.
+            </summary>
+        </member>
+        <member name="M:ConfigSystem.Manager.FileManagerBase.NotifyChangeStatus(ConfigSystem.Manager.FileStatusEventArgs)">
+            <summary>
+            Raises the OnLoadingStatusChanged event with the <paramref name="e"/>.
+            </summary>
+            <param name="e">The <see cref="T:ConfigSystem.Manager.FileStatusEventArgs"/> that provide event information.</param>
+        </member>
+        <member name="M:ConfigSystem.Manager.FileManagerBase.GetEncoding">
+            <summary>
+            Returns the name of the current encoding.
+            </summary>
+            <returns>The name of the encoding being used.</returns>
+        </member>
+        <member name="M:ConfigSystem.Manager.FileManagerBase.SetEncoding(System.String)">
+            <summary>
+            Sets the encoding to the one defined by the name <paramref name="e"/>.
+            </summary>
+            <param name="e">The name of the encoding to use.</param>
+        </member>
+        <member name="M:ConfigSystem.Manager.FileManagerBase.ReadAllFileText(System.String,System.Text.Encoding)">
+            <summary>
+            Reads all the text from the file at the specified path.
+            </summary>
+            <param name="path">The path of the file to read as text.</param>
+            <param name="encoding">The encoding to read the file using.</param>
+            <returns>A <see langword="string"/> containing the contents of the file.</returns>
+        </member>
+        <member name="M:ConfigSystem.Manager.FileManagerBase.ReadAllFileText(System.String,System.String)">
+            <summary>
+            Reads all the text from the file at the specified path.
+            </summary>
+            <param name="path">The path of the file to read as text.</param>
+            <param name="encodingName">The name of the encoding to read the file using.</param>
+            <returns>A <see langword="string"/> containing the contents of the file.</returns>
+        </member>
+        <member name="M:ConfigSystem.Manager.FileManagerBase.WriteAllFileText(System.String,System.String,System.Text.Encoding)">
+            <summary>
+            Writes all the text to the file at the specified path, overwriting any existing data.
+            </summary>
+            <param name="path">The path of the file to write the contents to.</param>
+            <param name="contents">The contents to write to the file.</param>
+            <param name="encoding">The encoding to write the contents using.</param>
+        </member>
+        <member name="M:ConfigSystem.Manager.FileManagerBase.WriteAllFileText(System.String,System.String,System.String)">
+            <summary>
+            Writes all the text to the file at the specified path, overwriting any existing data.
+            </summary>
+            <param name="path">The path of the file to write the contents to.</param>
+            <param name="contents">The contents to write to the file.</param>
+            <param name="encodingName">The name of the encoding to write the contents using.</param>
+        </member>
+        <member name="E:ConfigSystem.Manager.FileManagerBase.OnValuesChanged">
+            <summary>
+            Occurs when values change.
+            </summary>
+        </member>
+        <member name="E:ConfigSystem.Manager.FileManagerBase.OnLoadingStatusChanged">
+            <summary>
+            Occurs when loading status changes.
+            </summary>
+        </member>
+        <member name="P:ConfigSystem.Manager.FileManagerBase.CanRead">
+            <summary>
+            Gets a value indicating whether the manager is capable of reading.
+            </summary>
+        </member>
+        <member name="P:ConfigSystem.Manager.FileManagerBase.CanWrite">
+            <summary>
+            Gets a value indicating whether the manager is capable of writing.
+            </summary>
+        </member>
+        <member name="M:ConfigSystem.Manager.FileManager.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:ConfigSystem.Manager.FileManager"/> class.
+            </summary>
+        </member>
+        <member name="M:ConfigSystem.Manager.FileManager.Initialize(System.String)">
+            <summary>
+            Initialize the FileName to <paramref name="file"/>, adjusted for platform specifics.
+            </summary>
+            <param name="file">The path to the file.</param>
+        </member>
+        <member name="M:ConfigSystem.Manager.FileManager.LoadConfig">
+            <summary>
+            Load the config file.
+            </summary>
+            <returns>true if successful.</returns>
+        </member>
+        <member name="M:ConfigSystem.Manager.FileManager.SaveConfig">
+            <summary>
+            Save the config file.
+            </summary>
+            <returns>true if successful.</returns>
+        </member>
+        <member name="P:ConfigSystem.Manager.FileManager.FileName">
+            <summary>
+            Gets the path to the file that will persist the data.
+            </summary>
+            <value></value>
+        </member>
+        <member name="T:ConfigSystem.Data.ConfigValueManager">
+            <summary>
+            Represents a key to array JSON construct that can be persistently stored.
+            </summary>
+            <seealso cref="T:ConfigSystem.IConfigStorable"/>
+        </member>
+        <member name="F:ConfigSystem.Data.ConfigValueManager.Values">
+            <summary>
+            The mapping of property name to its array of values.
+            </summary>
+        </member>
+        <member name="F:ConfigSystem.Data.ConfigValueManager.valuesSection">
+            <summary>
+            The critical section that locks modifications to <seealso cref="F:ConfigSystem.Data.ConfigValueManager.Values"/>.
+            </summary>
+        </member>
+        <member name="M:ConfigSystem.Data.ConfigValueManager.#ctor(System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:ConfigSystem.Data.ConfigValueManager"/> class.
+            </summary>
+            <param name="name">The name for this manager.</param>
+        </member>
+        <member name="M:ConfigSystem.Data.ConfigValueManager.Initialize(System.String)">
+            <summary>
+            Creates a new entry in <seealso cref="F:ConfigSystem.Data.ConfigValueManager.Values"/> using <paramref name="valueName"/> as a key. 
+            </summary>
+            <param name="valueName">The name of the value being initialized.</param>
+        </member>
+        <member name="M:ConfigSystem.Data.ConfigValueManager.GetValue(System.String)">
+            <summary>
+            Gets the value at index 1 in the array <paramref name="valueName"/>.
+            </summary>
+            <param name="valueName">The name of the value to retrieve index 1 of.</param>
+            <returns>The value at index 1.</returns>
+        </member>
+        <member name="M:ConfigSystem.Data.ConfigValueManager.GetValueAtIndex(System.String,System.Int32)">
+            <summary>
+            Gets the value at index <paramref name="index"/> in key <paramref name="valueName"/> within <seealso cref="F:ConfigSystem.Data.ConfigValueManager.Values"/>.
+            </summary>
+            <param name="valueName">The key of the array to index into.</param>
+            <param name="index">The index of the array of the value to retrieve.</param>
+            <returns>The corresponding value.</returns>
+        </member>
+        <member name="M:ConfigSystem.Data.ConfigValueManager.SetValue(System.String,System.String)">
+            <summary>
+            Sets the value at index 1 in the array with key <paramref name="valueName"/> to <paramref name="newValue"/>.
+            </summary>
+            <param name="valueName">The key of the array.</param>
+            <param name="newValue">The new value for index 1.</param>
+        </member>
+        <member name="M:ConfigSystem.Data.ConfigValueManager.SetValueByIndex(System.String,System.Int32,System.String)">
+            <summary>
+            Sets the value at index <paramref name="index"/> in the array with key <paramref name="valueName"/> to <paramref name="newValue"/>.
+            </summary>
+            <param name="valueName">The key of the array.</param>
+            <param name="index">The index to set.</param>
+            <param name="newValue">The new value for index <paramref name="index"/>.</param>
+        </member>
+        <member name="M:ConfigSystem.Data.ConfigValueManager.GetSerializableData">
+            <summary>
+            Tells the manager what the data is to be stored.
+            </summary>
+            <returns>The data to be stored</returns>
+        </member>
+        <member name="M:ConfigSystem.Data.ConfigValueManager.SetSerializableData(System.Object)">
+            <summary>
+            Sets the internal Values state to <paramref name="newData"/> if it can be cast into the appropriate type.
+            </summary>
+            <param name="newData">The replacement backing data.</param>
+        </member>
+        <member name="M:ConfigSystem.Data.ConfigValueManager.GetSerializableType">
+            <summary>
+            Tells the manager what the structure of it's data is.
+            </summary>
+            <returns>the Type containing the structure</returns>
+        </member>
+        <member name="M:ConfigSystem.Data.ConfigValueManager.RaiseOnValueChanged(System.String,System.String,System.Int32)">
+            <summary>
+            Raises the <seealso cref="E:ConfigSystem.Data.ConfigValueManager.OnValueChanged"/> event using the parameters.
+            </summary>
+            <param name="valueName">The key of the array that is changing.</param>
+            <param name="newValue">The new value.</param>
+            <param name="index">The index of the value that is changing.</param>
+        </member>
+        <member name="E:ConfigSystem.Data.ConfigValueManager.OnValueChanged">
+            <summary>
+            Occurs when any value within <seealso cref="F:ConfigSystem.Data.ConfigValueManager.Values"/> changes.
+            </summary>
+        </member>
+        <member name="P:ConfigSystem.Data.ConfigValueManager.Name">
+            <summary>
+            Gets the name of the ConfigValue.
+            </summary>
+            <returns>the name of the storable object</returns>
+        </member>
+        <member name="T:ConfigSystem.Data.OneIndexedArray">
+            <summary>
+            This class is a wrapper around a list of strings.
+            It is a 1-indexed list that will insert empty strings when elements are inserted beyond the 
+            current count.
+            </summary>
+        </member>
+        <member name="F:ConfigSystem.Data.OneIndexedArray.values">
+            <summary>
+            The backing list of strings.
+            </summary>
+        </member>
+        <member name="M:ConfigSystem.Data.OneIndexedArray.#ctor(System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:ConfigSystem.Data.OneIndexedArray"/> class.
+            </summary>
+            <param name="d">The initial value in index 1.</param>
+        </member>
+        <member name="M:ConfigSystem.Data.OneIndexedArray.#ctor(System.Collections.Generic.IEnumerable{System.String})">
+            <summary>
+            Initializes a new instance of the <see cref="T:ConfigSystem.Data.OneIndexedArray"/> class.
+            </summary>
+            <param name="d">An enumeration of elements to include in the initial state of this array.</param>
+        </member>
+        <member name="M:ConfigSystem.Data.OneIndexedArray.#ctor(System.Collections.Generic.List{System.String})">
+            <summary>
+            Initializes a new instance of the <see cref="T:ConfigSystem.Data.OneIndexedArray"/> class.
+            </summary>
+            <param name="d">A list of elements to include in the initial state of this array.</param>
+        </member>
+        <member name="M:ConfigSystem.Data.OneIndexedArray.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:ConfigSystem.Data.OneIndexedArray"/> class.
+            </summary>
+        </member>
+        <member name="M:ConfigSystem.Data.OneIndexedArray.Set(System.Int32,System.String)">
+            <summary>
+            Sets the value at N = <paramref name="index"/> to <paramref name="v"/>, filling indexes 1 to N-1 with string.Empty.
+            </summary>
+            <param name="index">The 1-indexed index to set.</param>
+            <param name="v">The new value.</param>
+        </member>
+        <member name="M:ConfigSystem.Data.OneIndexedArray.Set(System.String)">
+            <summary>
+            Sets the value at N = 1 to <paramref name="v"/>.
+            </summary>
+            <param name="v">The new value for index 1.</param>
+        </member>
+        <member name="M:ConfigSystem.Data.OneIndexedArray.Get(System.Int32)">
+            <summary>
+            Gets the value at <paramref name="index"/>.
+            </summary>
+            <param name="index">The index to get the value of.</param>
+            <returns>The value at <paramref name="index"/> - 1.</returns>
+        </member>
+        <member name="M:ConfigSystem.Data.OneIndexedArray.Get">
+            <summary>
+            Gets the value at index 1.
+            </summary>
+            <returns>The value at index 1.</returns>
+        </member>
+        <member name="M:ConfigSystem.Data.OneIndexedArray.Add(System.String)">
+            <summary>
+            Adds an item to the array.
+            </summary>
+            <param name="item">The item to add.</param>
+        </member>
+        <member name="M:ConfigSystem.Data.OneIndexedArray.Clear">
+            <summary>
+            Removes all items from the <see cref="T:ConfigSystem.Data.OneIndexedArray"/>.
+            </summary>
+            <exception cref="T:System.NotSupportedException">
+            The <see cref="T:ConfigSystem.Data.OneIndexedArray"/> is read-only.
+            </exception>
+        </member>
+        <member name="M:ConfigSystem.Data.OneIndexedArray.Contains(System.String)">
+            <summary>
+            Determines whether the <see cref="T:ConfigSystem.Data.OneIndexedArray"/> contains a specific value.
+            </summary>
+            <returns><see langword="true"/> if <paramref name="item"/> is found in the <see cref="T:ConfigSystem.Data.OneIndexedArray"/>; otherwise, <see langword="false"/>.
+            </returns>
+            <param name="item">
+            The object to locate in the <see cref="T:ConfigSystem.Data.OneIndexedArray"/>.
+            </param>
+        </member>
+        <member name="M:ConfigSystem.Data.OneIndexedArray.CopyTo(System.String[],System.Int32)">
+            <summary>
+            Copies the elements of the <see cref="T:ConfigSystem.Data.OneIndexedArray"/> to an <see cref="T:System.Array"/>, starting at a particular <see cref="T:System.Array"/> index.
+            </summary>
+            <param name="array">
+            The one-dimensional <see cref="T:System.Array"/> that is the destination of the elements copied from <see cref="T:ConfigSystem.Data.OneIndexedArray"/>. The <see cref="T:System.Array"/> must have zero-based indexing.
+            </param>
+            <param name="arrayIndex">
+            The zero-based index in <paramref name="array"/> at which copying begins.
+            </param>
+            <exception cref="T:System.ArgumentNullException">
+            <paramref name="array"/> is <see langword="null"/>.
+            </exception>
+            <exception cref="T:System.ArgumentOutOfRangeException">
+            <paramref name="arrayIndex"/> is less than 0.
+            </exception>
+            <exception cref="T:System.ArgumentException">
+            <paramref name="array"/> is multidimensional.
+            -or-
+            <paramref name="arrayIndex"/> is equal to or greater than the length of <paramref name="array"/>.
+            -or-
+            The number of elements in the source <see cref="T:ConfigSystem.Data.OneIndexedArray"/> is greater than the available space from <paramref name="arrayIndex"/> to the end of the destination <paramref name="array"/>.
+            -or-
+            Type <paramref name="T"/> cannot be cast automatically to the type of the destination <paramref name="array"/>.
+            </exception>
+        </member>
+        <member name="M:ConfigSystem.Data.OneIndexedArray.Remove(System.String)">
+            <summary>
+            Removes the first occurrence of a specific object from the <see cref="T:ConfigSystem.Data.OneIndexedArray"/>.
+            </summary>
+            <returns><see langword="true"/> if <paramref name="item"/> was successfully removed from the <see cref="T:ConfigSystem.Data.OneIndexedArray"/>; otherwise, <see langword="false"/>. This method also returns <see langword="false"/> if <paramref name="item"/> is not found in the original <see cref="T:ConfigSystem.Data.OneIndexedArray"/>.
+            </returns>
+            <param name="item">
+            The object to remove from the <see cref="T:ConfigSystem.Data.OneIndexedArray"/>.
+            </param>
+            <exception cref="T:System.NotSupportedException">
+            The <see cref="T:ConfigSystem.Data.OneIndexedArray"/> is read-only.
+            </exception>
+        </member>
+        <member name="M:ConfigSystem.Data.OneIndexedArray.System#Collections#IEnumerable#GetEnumerator">
+            <summary>
+            Returns an enumerator that iterates through the collection.
+            </summary>
+            <returns>
+            An <see cref="T:System.Collections.IEnumerator"/> that can be used to iterate through the collection.
+            </returns>
+            <filterpriority>1</filterpriority>
+        </member>
+        <member name="M:ConfigSystem.Data.OneIndexedArray.System#Collections#Generic#IEnumerable{System#String}#GetEnumerator">
+            <inheritdoc/>
+        </member>
+        <member name="P:ConfigSystem.Data.OneIndexedArray.IsReadOnly">
+            <summary>
+            Gets a value indicating whether the <see cref="T:ConfigSystem.Data.OneIndexedArray"/> is read-only.
+            </summary>
+            <returns><see langword="true"/> if the <see cref="T:ConfigSystem.Data.OneIndexedArray"/> is read-only; otherwise, <see langword="false"/>.
+            </returns>
+        </member>
+        <member name="P:ConfigSystem.Data.OneIndexedArray.System#Collections#Generic#ICollection{System#String}#Count">
+            <inheritdoc/>
+        </member>
+        <!-- Badly formed XML comment ignored for member "M:ConfigSystem.Preset.PresetConnector.RegisterManager(System.String,ConfigSystem.Preset.PresetManager)" -->
+        <member name="M:ConfigSystem.Preset.PresetConnector.RegisterClient(ConfigSystem.Preset.PresetClient)">
+            <summary>
+            Register as a client to a manager.
+            </summary>
+            <param name="manager">The manager to register with.</param>
+            <param name="c">the client</param>
+        </member>
+        <member name="M:ConfigSystem.Preset.PresetConnector.GetManager(System.String)">
+            <summary>
+            Get the manager with name.
+            </summary>
+            <param name="manager">Name of the manager to get.</param>
+            <returns>the manager</returns>
+        </member>
+        <member name="T:ConfigSystem.Manager.MultiFileManager">
+            <summary>
+            Writes each value manager into multiple files, dictated by the value manager name.
+            </summary>
+            <seealso cref="T:ConfigSystem.Manager.FileManagerBase"/>
+        </member>
+        <member name="M:ConfigSystem.Manager.MultiFileManager.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:ConfigSystem.Manager.MultiFileManager"/> class.
+            </summary>
+        </member>
+        <member name="M:ConfigSystem.Manager.MultiFileManager.Initialize(System.String,System.String)">
+            <summary>
+            Allows S+ to initialize the module
+            </summary>
+            <param name="path">the path to the config files</param>
+            <param name="ext">the extension of the config files</param>
+        </member>
+        <member name="M:ConfigSystem.Manager.MultiFileManager.LoadConfig">
+            <summary>
+            Load the config file.
+            </summary>
+            <returns><see langword="true"/> upon success.</returns>
+        </member>
+        <member name="M:ConfigSystem.Manager.MultiFileManager.SaveConfig">
+            <summary>
+            Save the config file.
+            </summary>
+            <returns><see langword="true"/> upon success.</returns>
+        </member>
+        <member name="P:ConfigSystem.Manager.MultiFileManager.FilePath">
+            <summary>
+            Gets the path to the directory the files are within.
+            </summary>
+            <value></value>
+        </member>
+        <member name="P:ConfigSystem.Manager.MultiFileManager.FileExtension">
+            <summary>
+            Gets the extension for the files.
+            </summary>
+            <value></value>
+        </member>
+    </members>
+</doc>
